@@ -1069,7 +1069,7 @@ cons whose care is the abstract (a string).")
 (defun zz-narrow-advice (called-interactively-p)
   "Advice for narrowing functions.
 Call `zz-add-zone' if interactive or if `zz-add-zone-anyway-p'."
-  (when (or called-interactively-p  zz-add-zone-anyway-p)
+  (when (or called-interactively-p zz-add-zone-anyway-p)
     (zz-add-zone (point-min) (point-max) nil nil nil "Narrowed, and recorded zone: ")))
 
 (defadvice narrow-to-region (after zz-add-zone--region activate)
@@ -1078,7 +1078,7 @@ You can use `C-x n x' to widen to a previous buffer restriction.
 
 This is a destructive operation. The list structure of the variable
 value can be modified."
-  (zz-narrow-advice (called-interactively-p)))
+  (zz-narrow-advice (called-interactively-p 'interactive)))
 
 (defadvice narrow-to-defun (after zz-add-zone--defun activate)
   "Push the defun limits to the current `zz-izones-var'.
@@ -1086,7 +1086,7 @@ You can use `C-x n x' to widen to a previous buffer restriction.
 
 This is a destructive operation. The list structure of the variable
 value can be modified."
-  (zz-narrow-advice (called-interactively-p)))
+  (zz-narrow-advice (called-interactively-p 'interactive)))
 
 ;; Call `zz-add-zone' if interactive or `zz-add-zone-anyway-p'.
 ;;
@@ -1096,7 +1096,7 @@ You can use `C-x n x' to widen to a previous buffer restriction.
 
 This is a destructive operation. The list structure of the variable
 value can be modified."
-  (zz-narrow-advice (called-interactively-p)))
+  (zz-narrow-advice (called-interactively-p 'interactive)))
 
 ;;(@* "General Commands")
 
